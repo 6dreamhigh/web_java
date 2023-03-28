@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/event.css">
+</head>
+<body>
+<h1>창 크기 조절 이벤트</h1>
+<div id="result"></div>
+
+
+<script type="text/javascript" src = "http://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$(window).resize(function(){
+		$('#result').html('<p>'+$(window).width()+ ' x '+ $(window).height()+ '</p>');
+		/* 윈도우와 스크롤바 크기 확인 - 이미지 검색 시 :이미지 크기가 서로 상이한 경우 이미지 처리 -api제공함 */
+	});
+});
+</script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
