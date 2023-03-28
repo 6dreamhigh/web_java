@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript">
+//var는 전역변수
+var a = 100
+a = 250
+console.log(a)//250
+{
+	var a = 200
+	console.log(a)//200 --덮어버림
+	{
+		var a = 300
+		console.log(a)//300
+		{
+			var a = 400
+			console.log(a)//400
+		}
+		console.log(a)//400 --var는 전역변수로 값이 하나로 정해진다.
+	}
+	console.log(a)//400
+
+
+}
+console.log(a)//400
+</script>
+</body>
+</html>
