@@ -6,15 +6,28 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-form[name="loginForm"] div {
-	color: red;
-	font-size: 8pt;
-	font-weight: bold;
+
+form[name="loginForm"] {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   margin: 0 auto;
+   text-align: left;
 }
-</style>
+form[name="loginForm"] div {
+   color: red;
+   font-size: 8pt;
+   font-weight: bold;
+}
+
+</style> 
+
 </head>
 <body>
 <form name="loginForm" id="loginForm">
+	<a href ="../index.jsp" style =" text-decoration:none;">
+		<h1>로그인</h1>
+	</a>
 	<table border="1" cellpadding="5" cellspacing="0">
 		<tr>
 			<th>아이디</th>
@@ -33,7 +46,7 @@ form[name="loginForm"] div {
 		<tr>
 			<th colspan="2">
 				<input type="button" value="로그인" id="loginBtn">
-    			<input type="button" value="회원가입" onclick="location.href='/miniProject_jQuery/member/writeForm.do'">
+    			<input type="button" id ="button"  value="회원가입" onclick="location.href='/miniProject_jQuery/member/writeForm.do'">
 			</th>
 		</tr>
 	</table>
