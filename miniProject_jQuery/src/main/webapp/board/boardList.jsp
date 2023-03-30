@@ -27,10 +27,18 @@
 	margin: 5px;
 	cursor: pointer;
 }
+#boardListTable th{
+	font-size: 12pt;
+}
+
+#boardListTable td{
+	font-size: 10pt;
+}
 </style>
 </head>
 <body>
 <input type ="text" id ="pg" value="${pg }">
+<input type ="text" id ="memId" value="${memId}">
 <table id ="boardListTable" border="1" cellpadding="5" cellspacing="0" frame="hsides" rules="rows">
 	<tr>
 		<th width="100">글번호</th>
@@ -40,13 +48,14 @@
 		<th width="150">작성일</th>
 	</tr>
 	
-	<!-- 동적 처리 -->
+	<!-- 동적 처리 : 실시간은 boardList.js에서-->
 </table>
-<div style="margin-top: 15px; width: 850px; text-align: center;"></div>
+<div id = "boardPagingDiv" style="margin-top: 15px; width: 850px; text-align: center;"></div>
 
 <script type="text/javascript">
 function boardPaging(pg) {
-	location.href = "boardList.jsp?pg=" + pg;
+	//location.href = "/miniProject_jQuery/board/boardList.do?pg=" + pg;
+	location.href = "boardList.do?pg=" + pg;
 }
 </script>
 <script type="text/javascript" src = "http://code.jquery.com/jquery-3.6.4.min.js"></script>

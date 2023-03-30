@@ -21,7 +21,8 @@ $(function(){
 	
 	console.log();
 	var check = $('#check');/* id가 check인 태그를 가져온다. */
-	console.log('check = '+ check.tagName);// check = undefined
+	console.log('check = '+check);//check = [object Object]
+	console.log('check = '+ check.prop('tagName'));// check = INPUT
 	console.log('attr = '+ check.attr('checked'));// attr = checked
 	console.log('prop = '+ check.prop('checked'));//prop = true
 	

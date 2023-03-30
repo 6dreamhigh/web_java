@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -14,6 +15,7 @@ import org.json.simple.JSONObject;
 import com.control.CommandProcess;
 
 import board.bean.BoardDTO;
+import board.bean.BoardPaging;
 import board.dao.BoardDAO;
 
 public class GetBoardListService implements CommandProcess {
@@ -33,6 +35,22 @@ public class GetBoardListService implements CommandProcess {
 		map.put("endNum", endNum);
 		
 		List<BoardDTO> list = boardDAO.boardList(map);
+		
+		//페이징 처리
+		int totalA = boardDAO.getTotalA();//총 글수 가져오기
+		BoardPaging boardPaging = new BoardPaging();
+		boardPaging.setCurrentPage(pg);
+		boardPaging.setPageBlock(3);
+		boardPaging.setPageSize(5);
+		boardPaging.setTotalA(totalA);
+		boardPaging.makePaginHTML();
+		
+		//boardList에는 로그인 처리할 수 있는 요소가 없으므로 여기서 세션 처리 
+		HttpSession session = request.getSession();
+		String memId = (String) session.getAttribute("memId");
+		
+		
+		
 		//List 객체를 JSON으로 변환시켜서 보내야 한다.
 		JSONObject json = new JSONObject();
 		if(list != null) {
@@ -63,8 +81,15 @@ public class GetBoardListService implements CommandProcess {
 			json.put("list", array);
 		}//if
 		
+		//BoardPaging에서 pagingHTML필드만 =>json 으로 변환
+		json.put("pagingHTML", boardPaging.getPagingHTML()+ ""); //StringBuffer->String 변환
+		
+		//System.out.println(json);
 		
 		//응답
+		request.setAttribute("pg", pg);
+		request.setAttribute("memId", memId);// session값은 getBoardList.jsp로 감 boardList.jsp의 hidden
+		
 		request.setAttribute("json", json);
 		return "/board/getBoardList.jsp";
 	}

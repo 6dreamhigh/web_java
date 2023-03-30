@@ -16,19 +16,42 @@ $(document).ready(function(){
 				$('<tr/>').append($('<td/>',{
 					align: 'center',
 					text: items.seq
+					
+					
 				})).append($('<td/>',{
+					
+				}).append($('<a/>',{
+					href: '#',
+					class: 'subjectA',
 					text: items.subject
-				})).append($('<td/>',{
+				})) ).append($('<td/>',{
 					align: 'center',
 					text: items.id
 				})).append($('<td/>',{
 					align: 'center',
-					text: items.logtime
+					text: items.hit
 				})).append($('<td/>',{
 					align: 'center',
-					text: items.hit
+					text: items.logtime
 				})).appendTo($('#boardListTable'))
 			});
+			//페이징 처리
+			$('#boardPagingDiv').html(data.pagingHTML);
+			
+			//로그인 여부: 데이터 처리는 GetBoardListService.java에서 진행됨.
+			$('.subjectA').click(function(){
+				if($('#memId').val() == '')
+					alert('먼저 로그인하세요');
+				else
+					//console.log(seq.prop('tagName'));
+					var seq = $(this).parent().prev().text();//부모보다 바로 전의 태그의 text를 읽어들어옴
+					console.log(seq);
+					var pg = $('#pg').val();
+					location.href= '/miniProject_jQuery/board/boardView.do?seq='+seq+'&pg='+pg;
+					
+			});
+			
+			
 			
 		},
 		error: function(err){
