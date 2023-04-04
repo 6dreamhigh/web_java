@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel ="stylesheet" href="../css/common.css">
+<link rel ="stylesheet" href="../css/reset.css">
+</head>
+<body>
+<h1 class ="title">$.ajax() 함수를 사용한 텍스트 읽기</h1>
+<div class ="exec">
+	<input type ="button" value="txt파일 가져오기" id="mybtn"/>
+</div>
+<div class ="console" id ="result"></div>
+<script type="text/javascript" src = "http://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script type="text/javascript">
+$(function(){
+		$('#mybtn').click(function(){
+			$.ajax({
+				type: 'get',
+				url: '/Ajax_jQuery/text/text01.txt',
+				dataType: 'text',
+				timeout:30000,
+				cache:false,//이전 요청에 대한 캐쉬 저장 여부 
+				success:function(data){
+					$('#result').html(data);
+				},
+				error: function(xhr, textStatus, errorThrown){
+					$('div').html('<div>'+textStatus+'(Http-'+xhr.status+'/'+ errorThrown+ ')'+ '</div>');
+				}//404- 주소 x 500- 서버 에러 200- ok 405- get/post 잘못
+		});
+	});
+});
+</script>
+</body>
+</html>
