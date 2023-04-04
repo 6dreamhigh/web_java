@@ -60,6 +60,53 @@ public class BoardDAO {
 		return boardDTO;
 	}
 
+	public void boardReply(Map<String, Object> map) {
+		
+		
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		//원글번호
+		BoardDTO boardDTO = sqlSession.selectOne("boardSQL.getBoard",map.get("pseq"));
+		
+		//step update
+		//update board set step =step +1 where ref = 원글 ref and step > 원글 step
+		sqlSession.update("boardSQL.boardReply1", boardDTO);   
+		
+		
+		//insert
+		//답글 ref = 원글ref
+		//답글 lev = 원글 lev +1
+		//답글 step = 원글 step +1
+		//Map에는 id, name, email, subject, content, pseq를 담아왔다. 추가로 ref, lev, step 넣었다.
+		map.put("ref", boardDTO.getRef());
+		map.put("lev", boardDTO.getLev()+1);
+		map.put("step", boardDTO.getStep()+1);
+		sqlSession.insert("boardSQL.boardReply2",map);
+		
+		
+		//reply update
+		//update board set reply = reply+ 1 where seq = 원글 번호
+		sqlSession.update("boardSQL.boardReply3",boardDTO.getSeq());
+		sqlSession.commit();
+		sqlSession.close();
+	}
+
+	public void boardUpdate(Map<String, String> map) {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		sqlSession.update("boardSQL.boardUpdate",map);
+		sqlSession.commit();
+		sqlSession.close();
+		
+	}
+
+	public void boardDelete(String seq) {
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		sqlSession.delete("boardSQL.boardDelete",Integer.parseInt(seq));
+		sqlSession.commit();
+		sqlSession.close();
+	}
+
+	
+
 }
 
 

@@ -22,33 +22,54 @@ $(document).ready(function(){
 					
 				}).append($('<a/>',{
 					href: '#',
-					class: 'subjectA',
+					class: 'subjectA subjectA_'+items.seq,
 					text: items.subject
+					
 				})) ).append($('<td/>',{
 					align: 'center',
 					text: items.id
+					
 				})).append($('<td/>',{
 					align: 'center',
 					text: items.hit
+					
 				})).append($('<td/>',{
 					align: 'center',
 					text: items.logtime
 				})).appendTo($('#boardListTable'))
-			});
+				//답글
+				for(var i =1;i <=items.lev;i++){
+					$('.subjectA_'+items.seq).before('&emsp;')
+				}
+			    if(items.pseq != 0){
+					//답글인 경우 이미지 붙이기
+					$('.subjectA_'+items.seq).before($('<img/>',{
+						'src': '/miniProject_jQuery/image/reply.gif'
+					}));
+				}
+				
+				
+				
+			});//each
+			
 			//페이징 처리
 			$('#boardPagingDiv').html(data.pagingHTML);
 			
 			//로그인 여부: 데이터 처리는 GetBoardListService.java에서 진행됨.
 			$('.subjectA').click(function(){
 				if($('#memId').val() == '')
+				{
 					alert('먼저 로그인하세요');
+					location.href='/miniProject_jQuery/member/loginForm.do';
+				}
 				else
+				{
 					//console.log(seq.prop('tagName'));
 					var seq = $(this).parent().prev().text();//부모보다 바로 전의 태그의 text를 읽어들어옴
 					console.log(seq);
 					var pg = $('#pg').val();
 					location.href= '/miniProject_jQuery/board/boardView.do?seq='+seq+'&pg='+pg;
-					
+				}
 			});
 			
 			

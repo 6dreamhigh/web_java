@@ -24,13 +24,41 @@ $(document).ready(function(){
 		}		                          
 	});
 });
-
+//글 삭제- 삭제 후에는 1pg로 보내준다.
+$('#boardDeleteBtn').click(function(){
+	$('#boardViewForm').attr('action','/miniProject_jQuery/board/boardDeleteForm.do');
+	$('#boardViewForm').submit();//seq,pg
+});
 
 //글수정 폼
 $('#boardUpdateFormBtn').click(function(){
-	$('boardViewForm').attr('action','/miniProject_jQuery/board/boardUpdateForm.do');
-	$('#boardViewForm').submit();
+	$('#boardViewForm').attr('action','/miniProject_jQuery/board/boardUpdateForm.do');
+	$('#boardViewForm').submit();//seq,pg
 });
+
+//답글쓰기 폼
+$('#boardReplyFormBtn').click(function(){
+	alert('aaaa');
+	$('#boardViewForm').attr('action','/miniProject_jQuery/board/boardReplyForm.do');
+	$('#boardViewForm').submit();//seq,pg
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

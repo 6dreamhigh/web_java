@@ -10,7 +10,7 @@
 </head>
 <body>
 
-	<form id="boardViewForm" action="">
+	<form id="boardViewForm">
 		<input type="text" id ="seq" name ="seq" value="${requestScope.seq }">
 		<input type="text" id ="pg" name = "pg" value="${pg }">
 		<input type="text" id ="memId" value="${memId }">
@@ -51,6 +51,7 @@
 
 <script type="text/javascript" src = "http://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script type="text/javascript" src = "../js/boardView.js"></script>
+
 </body>
 </html>
 
