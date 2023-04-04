@@ -131,9 +131,7 @@ $(function(){
 				//{'user_id':user_id, 'user_password':user_password},
 				$(this).serialize(),//form창에 데이터를 받고 있으므로
 				function(data){
-					
-					var message = $(data).find('message').text();
-						
+					var message = $(data).find('message').text();						
 					alert(message);
 					}//function(data)
 				).fail(function(){
